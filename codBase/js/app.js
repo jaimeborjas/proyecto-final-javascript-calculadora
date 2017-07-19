@@ -34,6 +34,28 @@ var calculadora = {
     this.pnValor2 = 0;
   }
 };
-//arreglo con todas las teclas
+// teclas
 var paTeclas = document.getElementsByClassName('tecla');
+//click a teclas
+for (var i = 0; i < paTeclas.length; i+=1) {
+  paTeclas[i].onmousedown = presionaBoton;
+  paTeclas[i].onclick = presionaClick;
+  paTeclas[i].onmouseup = sueltaBoton;
+}
 
+//presionar botón
+function presionaBoton(e){
+  e.target.style.opacity = 0.5;
+}
+//soltar botón
+function sueltaBoton(e){
+  e.target.style.opacity = 1.0;
+}
+
+
+// click en botón
+function presionaClick(e){
+  var pantalla = document.getElementById('display').innerHTML;
+  if (pantalla == "0" && e.target.id != "punto" && e.target.id != "sign"){
+    pantalla = "";
+  }
