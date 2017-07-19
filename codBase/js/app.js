@@ -59,3 +59,58 @@ function presionaClick(e){
   if (pantalla == "0" && e.target.id != "punto" && e.target.id != "sign"){
     pantalla = "";
   }
+//raiz no debe ejecutar ninguna tarea
+  if (e.target.id != "raiz"){
+    //inicia pantalla en 0
+    if (e.target.id == "on"){
+      pantalla = "0";
+      calculadora.plPunto = false;
+    //verifica operaciones
+    } else if (e.target.id == "mas" || e.target.id == "menos" || e.target.id == "por" || e.target.id == "dividido"){
+        //asigna valor
+        calculadora.asig(pantalla);
+        //Si existe valor2 calcula y asigna resultado a valor1
+        if (calculadora.pnValor2 != 0){
+          calculadora.calc();
+          calculadora.pnValor1 = calculadora.pnResult;
+          calculadora.pnValor2 = 0;
+        }
+        calculadora.pcOperac = e.target.id;
+        calculadora.plPunto = false;
+        pantalla = "";
+    //muestra resultado al presionar boton =
+    } else if (e.target.id == "igual"){
+        if (pantalla == ""){
+          pantalla = "0";
+        }
+        calculadora.asig(pantalla);
+        calculadora.calc();
+        pantalla = calculadora.pnResult.toString().substr(0, 8);
+    //controla longitud de número ingresado
+    } else if (pantalla.length < 8){
+      //controla punto, signo y concatena números
+      switch (e.target.id) {
+        case "punto":
+          if (!calculadora.plPunto){
+            pantalla = pantalla + ".";
+            calculadora.plPunto = true;
+          }
+          break;
+        case "sign":
+          if (pantalla != "0"){
+            if (pantalla.substr(0,1) == "-"){
+              pantalla = pantalla.substr(1);
+            }else{
+              pantalla = "-" + pantalla;
+            }
+          }
+          break;
+        default:
+          pantalla = pantalla + e.target.id;
+      }
+    }
+  }
+  //muestra resultado
+  document.getElementById('display').innerHTML = pantalla;
+}
+
