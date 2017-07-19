@@ -1,6 +1,6 @@
-// objeto calculadora
+// calculadora
 var calculadora = {
-  //propiedades utilizadas para funcionamiento de calculadora
+  //propiedades
   pnValor1: 0,
   pnValor2: 0,
   pnResult: 0,
@@ -19,3 +19,19 @@ var calculadora = {
       this.pnValor2 = parseFloat(p_nValor);
     }
   },
+    //cálculo
+  calc : function() {
+    if (this.pcOperac == "mas") {
+      this.pnResult = this.suma();
+    }else if (this.pcOperac == "menos") {
+      this.pnResult = this.rest();
+    }else if (this.pcOperac == "por") {
+      this.pnResult = this.mult();
+    }else if (this.pcOperac == "dividido") {
+      this.pnResult = this.divi();
+    }
+    this.pnValor1 = 0;
+    this.pnValor2 = 0;
+  }
+};
+
