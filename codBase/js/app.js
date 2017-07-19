@@ -34,4 +34,6 @@ var calculadora = {
     this.pnValor2 = 0;
   }
 };
+//arreglo con todas las teclas
+var paTeclas = document.getElementsByClassName('tecla');
 
